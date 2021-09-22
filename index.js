@@ -63,16 +63,12 @@ server.post('/auth', (req,res,next)=>{
                     error: 'invalid credentials'
                 })
             }
-            // if(!bcrypt.compareSync(req.body.password, user.password)){
-            //     return res.status(401).json({
-            //         title: 'login failed',
-            //         error: 'invalid credentials'
-            //     })
-            // }
+
             let token = jwt.sign({ userId: user._id}, 'secretkey');
             return res.status(200).json({
                 title: 'login success',
-                token: token
+                token: token,
+                userInfo: user
             })
         })
     }
